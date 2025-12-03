@@ -7,8 +7,8 @@ import CoreEngine.*;
 /**
  * LibraryApplication의 패널(Event Listener Object의 역할 겸용)
  *
- * @author (profsHwang)
- * @version (2025.11.26)
+ * @author (4Team)
+ * @version (2025.12.04)
  */
 public class MyPanel extends JPanel implements ActionListener
 {
@@ -75,7 +75,7 @@ public class MyPanel extends JPanel implements ActionListener
             output = loanORreturn[index] + "자 : " + mtf_BorrowerName.getText() + "\n"
             + loanORreturn[index] + "책 제목 : " + mtf_BookTitle.getText() + "\n"
             + loanORreturn[index] + "책 저자 : " + mtf_BookAuthor.getText() + "\n"
-            + loanORreturn[index] + "책 등록번호 : " + mtf_BookID.getText() + "\n"
+            + loanORreturn[index] + "책 고유번호 : " + mtf_BookID.getText() + "\n"
             + "-------------------------------------------------" + "\n";
         }   
 
