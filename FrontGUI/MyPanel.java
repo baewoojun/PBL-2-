@@ -30,7 +30,7 @@ public class MyPanel extends JPanel implements ActionListener
         ml_BookTitle = new JLabel("책 제목");
         ml_BookAuthor = new JLabel("책 저자이름");
         ml_BookID = new JLabel("책 등록번호");
-        
+
         mtf_BorrowerName = new JTextField("Your Name", 20);
         mtf_BorrowerEmail = new JTextField("Your Email",20);
         mtf_BookTitle = new JTextField("Book Title", 20);
@@ -87,6 +87,14 @@ public class MyPanel extends JPanel implements ActionListener
             String outputTitle = libApp.returnOneBook(mtf_BookID.getText());
             mta.append(outputTitle + "\n" + output);
         }
+
+        else if(index == 2 && e.getSource().equals(mb_Run)){
+            mta.append("[이용자 등록]\n");
+            mta.append("이름: " + mtf_BorrowerName.getText() + "\n");
+            mta.append("이메일: " + mtf_BorrowerEmail.getText() + "\n");
+            mta.append("---------------------------------\n");
+        }
+
         else if(e.getSource().equals(mb_Clear)){
             mtf_BorrowerName.setText("");
             mtf_BookTitle.setText("");
