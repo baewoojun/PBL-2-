@@ -11,7 +11,7 @@ public class MyFrame extends JFrame
 {
     public MyFrame(){
         this.setTitle("도서관 관리 시스템");
-        this.setSize(297, 550);
+        this.setSize(300, 500);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
         

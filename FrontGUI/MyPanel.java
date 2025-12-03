@@ -93,6 +93,9 @@ public class MyPanel extends JPanel implements ActionListener
             if(borrowedBookSet.contains(bookID)){
                 mta.append("[대출 실패] 이 책 (" + bookTitle + "," + bookID + ") 은 이미 대출 중입니다!\n");
                 mta.append("---------------------------------\n");
+                String msgFor = libApp.displayBookForLoan();
+                String msgOn = libApp.displayBookOnLoan();
+
                 return;
             }
             // LibraryApplication 실제 동작

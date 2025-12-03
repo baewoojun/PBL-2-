@@ -31,7 +31,7 @@ public class LibraryApplication
     
     // UC#4 : 대출중인 책 목록 Display
     public String displayBookOnLoan(){
-        return "대출가능한 책 목록을 Display하였습니다.";
+        return "대출가능한 책 목록을 Display하였습니다.";
     }
     
     // UC#5 : 책 1권 대출
