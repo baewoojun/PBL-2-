@@ -15,22 +15,24 @@ public class MyPanel extends JPanel implements ActionListener
     protected JPanel buttonPanel;
     protected JPanel outputDataPanel;
 
-    protected JLabel ml_BorrowerName, ml_BookTitle, ml_BookAuthor, ml_BookID;
-    protected JTextField mtf_BorrowerName, mtf_BookTitle, mtf_BookAuthor, mtf_BookID;
+    protected JLabel ml_BorrowerName, ml_BorrowerEmail, ml_BookTitle, ml_BookAuthor, ml_BookID;
+    protected JTextField mtf_BorrowerName, mtf_BorrowerEmail, mtf_BookTitle, mtf_BookAuthor, mtf_BookID;
     protected JButton mb_Run, mb_Clear;
     protected JTextArea mta;
-    protected String[] loanORreturn = {"대출", "반납"};
+    protected String[] loanORreturn = {"대출", "반납","등록","삭제"};
     protected JComboBox mcb_loanORreturn;
     protected String output = "";
     protected int index;
 
     public MyPanel(){
         ml_BorrowerName = new JLabel("이용자 이름");
+        ml_BorrowerEmail = new JLabel("이용자 이메일");
         ml_BookTitle = new JLabel("책 제목");
         ml_BookAuthor = new JLabel("책 저자이름");
         ml_BookID = new JLabel("책 등록번호");
-
+        
         mtf_BorrowerName = new JTextField("Your Name", 20);
+        mtf_BorrowerEmail = new JTextField("Your Email",20);
         mtf_BookTitle = new JTextField("Book Title", 20);
         mtf_BookAuthor= new JTextField("Book Author", 20);
         mtf_BookID = new JTextField("Book ID", 20);
@@ -38,6 +40,8 @@ public class MyPanel extends JPanel implements ActionListener
 
         this.add(ml_BorrowerName);
         this.add(mtf_BorrowerName);
+        this.add(ml_BorrowerEmail);
+        this.add(mtf_BorrowerEmail);
         this.add(ml_BookTitle);
         this.add(mtf_BookTitle);
         this.add(ml_BookAuthor);
