@@ -7,7 +7,7 @@ import java.util.HashSet;
 import CoreEngine.*;
 /**
  * LibraryApplication의 패널(Event Listener Object의 역할 겸용)
- * @author (4Team)
+ * @author (2022320014_정재헌, 2022320035_배우준, 20220320018_이성민)
  * @version (2025.12.04)
  */
 public class MyPanel extends JPanel implements ActionListener
