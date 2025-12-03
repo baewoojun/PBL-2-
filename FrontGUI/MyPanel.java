@@ -1,10 +1,12 @@
 package FrontGUI;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import CoreEngine.*;
+
 /**
  * LibraryApplication의 패널(Event Listener Object의 역할 겸용)
  * @author (4Team)
@@ -24,9 +26,10 @@ public class MyPanel extends JPanel implements ActionListener
     protected String output = "";
     protected int index;
 
-    //GUI에서 관리하는 대출 정보
-    protected HashMap<String, String> loanMap = new HashMap<>();// (email → bookID)
-    protected HashSet<String> borrowedBookSet = new HashSet<>();// 대출 중 책 목록
+    // GUI에서 관리하는 대출 정보
+    protected HashMap<String, String> loanMap = new HashMap<>();// 이메일 -> 책ID
+    protected HashSet<String> borrowedBookSet = new HashSet<>();// 대출 중인 책ID 목록
+
 
     public MyPanel(){
         ml_BorrowerName = new JLabel("이용자 이름");
@@ -38,7 +41,7 @@ public class MyPanel extends JPanel implements ActionListener
         mtf_BorrowerName = new JTextField("Your Name", 20);
         mtf_BorrowerEmail = new JTextField("Your Email",20);
         mtf_BookTitle = new JTextField("Book Title", 20);
-        mtf_BookAuthor= new JTextField("Book Author", 20);
+        mtf_BookAuthor = new JTextField("Book Author", 20);
         mtf_BookID = new JTextField("Book ID", 20);
         mcb_loanORreturn = new JComboBox(loanORreturn);
 
@@ -68,6 +71,7 @@ public class MyPanel extends JPanel implements ActionListener
         mb_Clear.addActionListener(this);
     }
 
+
     public void actionPerformed(ActionEvent e){
         LibraryApplication libApp = new LibraryApplication("선문대학교 중앙도서관");
 
@@ -82,36 +86,56 @@ public class MyPanel extends JPanel implements ActionListener
                     + loanORreturn[index] + "책 고유번호 : " + mtf_BookID.getText() + "\n"
                     + "-------------------------------------------------" + "\n";
         }
-
         if(index == 0 && e.getSource().equals(mb_Run)){
+            String borrowerName = mtf_BorrowerName.getText();
             String borrowerEmail = mtf_BorrowerEmail.getText();
+            String bookTitle = mtf_BookTitle.getText();
             String bookID = mtf_BookID.getText();
 
+            // 동일 책 중복 대출 방지
             if(borrowedBookSet.contains(bookID)){
-                mta.append("[대출 실패] 이 책 (" + bookID + ") 은 이미 대출 중입니다!\n");
+                mta.append("[대출 실패] 이 책 (" + bookTitle + "," + bookID + ") 은 이미 대출 중입니다!\n");
                 mta.append("---------------------------------\n");
                 return;
             }
-            String outputTitle = libApp.loanOneBook(mtf_BorrowerName.getText(), bookID);
-            mta.append(outputTitle + "\n" + output);
+
+            // LibraryApplication 실제 동작
+            libApp.loanOneBook(borrowerName, bookID);
+
+            // ⭐ 우리가 보기 좋은 출력 포맷으로 직접 출력
+            mta.append("책(" + bookTitle + "," + bookID + ")이 이용자(" + borrowerName + ")에게 대출되었습니다.\n");
+            mta.append(output);
 
             loanMap.put(borrowerEmail, bookID);
             borrowedBookSet.add(bookID);
+
+            mta.append("[대출 완료] 이용자(" + borrowerName + ")는 책(" + bookTitle + "," + bookID + ")을 대출 중입니다.\n");
+            mta.append("---------------------------------\n");
         }
         else if(index == 1 && e.getSource().equals(mb_Run)){
+            String borrowerName = mtf_BorrowerName.getText();
             String borrowerEmail = mtf_BorrowerEmail.getText();
+            String bookTitle = mtf_BookTitle.getText();
             String bookID = mtf_BookID.getText();
 
-            String outputTitle = libApp.returnOneBook(bookID);
-            mta.append(outputTitle + "\n" + output);
+            // LibraryApplication 실제 동작
+            libApp.returnOneBook(bookID);
 
+            // ⭐ 보기 좋은 출력 형식으로 출력
+            mta.append("책(" + bookTitle + "," + bookID + ")이 반납되었습니다.\n");
+            mta.append("반납자 : " + borrowerName + "\n");
+            mta.append("반납책 제목 : " + bookTitle + "\n");
+            mta.append("반납책 저자 : " + mtf_BookAuthor.getText() + "\n");
+            mta.append("반납책 고유번호 : " + bookID + "\n");
+            mta.append("---------------------------------\n");
+
+            // 기록 삭제
             if(loanMap.containsKey(borrowerEmail)){
                 loanMap.remove(borrowerEmail);
             }
-
             borrowedBookSet.remove(bookID);
 
-            mta.append("[반납 완료] 현재 이용자는 대출 중이 아닙니다.\n");
+            mta.append("[반납 완료] 이용자(" + borrowerName + ")는 현재 대출 중이 아닙니다.\n");
             mta.append("---------------------------------\n");
         }
         else if(index == 2 && e.getSource().equals(mb_Run)){
@@ -121,20 +145,22 @@ public class MyPanel extends JPanel implements ActionListener
             mta.append("---------------------------------\n");
         }
         else if(index == 3 && e.getSource().equals(mb_Run)){
+            String borrowerName = mtf_BorrowerName.getText();
             String borrowerEmail = mtf_BorrowerEmail.getText();
 
             if(loanMap.containsKey(borrowerEmail)){
-                mta.append("[삭제 실패] 이 이용자는 현재 책을 대출 중입니다!\n");
+                mta.append("[삭제 실패] 이용자(" + borrowerName + ")는 현재 책을 대출 중입니다!\n");
                 mta.append("반납 후 삭제 가능합니다.\n");
             } else {
                 mta.append("[이용자 삭제]\n");
-                mta.append("이름: " + mtf_BorrowerName.getText() + "\n");
+                mta.append("이름: " + borrowerName + "\n");
                 mta.append("이메일: " + borrowerEmail + "\n");
             }
             mta.append("---------------------------------\n");
         }
         else if(e.getSource().equals(mb_Clear)){
             mtf_BorrowerName.setText("");
+            mtf_BorrowerEmail.setText("");
             mtf_BookTitle.setText("");
             mtf_BookAuthor.setText("");
             mtf_BookID.setText("");
