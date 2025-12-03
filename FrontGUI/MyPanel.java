@@ -15,7 +15,7 @@ public class MyPanel extends JPanel implements ActionListener
 {
     protected JPanel buttonPanel;
     protected JPanel outputDataPanel;
-
+    
     protected JLabel ml_BorrowerName, ml_BorrowerEmail, ml_BookTitle, ml_BookAuthor, ml_BookID;
     protected JTextField mtf_BorrowerName, mtf_BorrowerEmail, mtf_BookTitle, mtf_BookAuthor, mtf_BookID;
     protected JButton mb_Run, mb_Clear;
@@ -197,6 +197,5 @@ public class MyPanel extends JPanel implements ActionListener
             mtf_BookAuthor.setText("");
             mtf_BookID.setText("");
         }
-        
     }
 }
