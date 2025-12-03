@@ -102,7 +102,6 @@ public class MyPanel extends JPanel implements ActionListener
             // LibraryApplication 실제 동작
             libApp.loanOneBook(borrowerName, bookID);
 
-            // ⭐ 우리가 보기 좋은 출력 포맷으로 직접 출력
             mta.append("책(" + bookTitle + "," + bookID + ")이 이용자(" + borrowerName + ")에게 대출되었습니다.\n");
             mta.append(output);
 
@@ -120,8 +119,6 @@ public class MyPanel extends JPanel implements ActionListener
 
             // LibraryApplication 실제 동작
             libApp.returnOneBook(bookID);
-
-            // ⭐ 보기 좋은 출력 형식으로 출력
             mta.append("책(" + bookTitle + "," + bookID + ")이 반납되었습니다.\n");
             mta.append("반납자 : " + borrowerName + "\n");
             mta.append("반납책 제목 : " + bookTitle + "\n");
