@@ -8,7 +8,7 @@ import java.util.HashSet;
 import CoreEngine.*;
 
 /**
- * LibraryApplication의 패널(Event Listener Object의 역할 겸용)
+ * LibraryApplication의 GUI(이용자 등록,삭제,책 등록,삭제, 대출중 화면 출력, 대출 가능시 화면 출력)
  * @author (2022320014_정재헌, 2022320035_배우준, 20220320018_이성민)
  * @version (2025.12.04)
  */
