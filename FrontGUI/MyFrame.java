@@ -1,5 +1,4 @@
 package FrontGUI;
-
 import javax.swing.*;
 
 /**
