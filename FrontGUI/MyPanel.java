@@ -6,7 +6,6 @@ import java.awt.event.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import CoreEngine.*;
-
 /**
  * LibraryApplication의 GUI(이용자 등록,삭제,책 등록,삭제, 대출중 화면 출력, 대출 가능시 화면 출력)
  * @author (2022320014_정재헌, 2022320035_배우준, 20220320018_이성민)
@@ -21,7 +20,7 @@ public class MyPanel extends JPanel implements ActionListener
     protected JTextField mtf_BorrowerName, mtf_BorrowerEmail, mtf_BookTitle, mtf_BookAuthor, mtf_BookID;
     protected JButton mb_Run, mb_Clear;
     protected JTextArea mta;
-    protected String[] loanORreturn = {"대출", "반납","등록","삭제"};
+    protected String[] loanORreturn = {"대출", "반납","이용자 등록","이용자 삭제","책 등록","책 삭제"};
     protected JComboBox mcb_loanORreturn;
     protected String output = "";
     protected int index;
@@ -29,8 +28,7 @@ public class MyPanel extends JPanel implements ActionListener
     // GUI에서 관리하는 대출 정보
     protected HashMap<String, String> loanMap = new HashMap<>();// 이메일 -> 책ID
     protected HashSet<String> borrowedBookSet = new HashSet<>();// 대출 중인 책ID 목록
-
-
+    protected HashMap<String, String[]> bookMap = new HashMap<>();
     public MyPanel(){
         ml_BorrowerName = new JLabel("이용자 이름");
         ml_BorrowerEmail = new JLabel("이용자 이메일");
@@ -71,7 +69,6 @@ public class MyPanel extends JPanel implements ActionListener
         mb_Clear.addActionListener(this);
     }
 
-
     public void actionPerformed(ActionEvent e){
         LibraryApplication libApp = new LibraryApplication("선문대학교 중앙도서관");
 
@@ -81,10 +78,10 @@ public class MyPanel extends JPanel implements ActionListener
             index = cb.getSelectedIndex();
 
             output = loanORreturn[index] + "자 : " + mtf_BorrowerName.getText() + "\n"
-                    + loanORreturn[index] + "책 제목 : " + mtf_BookTitle.getText() + "\n"
-                    + loanORreturn[index] + "책 저자 : " + mtf_BookAuthor.getText() + "\n"
-                    + loanORreturn[index] + "책 고유번호 : " + mtf_BookID.getText() + "\n"
-                    + "-------------------------------------------------" + "\n";
+            + loanORreturn[index] + "책 제목 : " + mtf_BookTitle.getText() + "\n"
+            + loanORreturn[index] + "책 저자 : " + mtf_BookAuthor.getText() + "\n"
+            + loanORreturn[index] + "책 고유번호 : " + mtf_BookID.getText() + "\n"
+            + "-------------------------------------------------" + "\n";
         }
         if(index == 0 && e.getSource().equals(mb_Run)){
             String borrowerName = mtf_BorrowerName.getText();
@@ -98,7 +95,6 @@ public class MyPanel extends JPanel implements ActionListener
                 mta.append("---------------------------------\n");
                 return;
             }
-
             // LibraryApplication 실제 동작
             libApp.loanOneBook(borrowerName, bookID);
 
@@ -152,6 +148,42 @@ public class MyPanel extends JPanel implements ActionListener
                 mta.append("[이용자 삭제]\n");
                 mta.append("이름: " + borrowerName + "\n");
                 mta.append("이메일: " + borrowerEmail + "\n");
+            }
+            mta.append("---------------------------------\n");
+        }
+        else if(index == 4 && e.getSource().equals(mb_Run)){
+            String title = mtf_BookTitle.getText();
+            String author = mtf_BookAuthor.getText();
+            String bookID = mtf_BookID.getText();
+
+            bookMap.put(bookID, new String[]{title, author});
+
+            mta.append("[책 등록]\n");
+            mta.append("책 제목: " + mtf_BookTitle.getText() + "\n");
+            mta.append("책 저자이름: " + mtf_BookAuthor.getText() + "\n");
+            mta.append("책 등록번호: " + mtf_BookID.getText() + "\n");
+            mta.append("---------------------------------\n");
+        }
+        else if(index == 5 && e.getSource().equals(mb_Run)){
+            String bookID = mtf_BookID.getText().trim();
+
+            if(borrowedBookSet.contains(bookID)){
+                mta.append("[삭제 실패] 이 책은 대출 중입니다.\n");
+                mta.append("반납 후 삭제 가능합니다.\n");
+            }
+            else if(bookMap.containsKey(bookID)){
+                String[] data = bookMap.get(bookID);
+
+                mta.append("[책 삭제]\n");
+                mta.append("책 제목 : " + data[0] + "\n");
+                mta.append("책 저자이름 : " + data[1] + "\n");
+                mta.append("책 고유번호 : " + bookID + "\n");
+
+                bookMap.remove(bookID);
+                mta.append("삭제가 완료되었습니다.\n");
+            }
+            else {
+                mta.append("[삭제 실패] 해당 책이 존재하지 않습니다.\n");
             }
             mta.append("---------------------------------\n");
         }
