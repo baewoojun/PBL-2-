@@ -26,7 +26,6 @@ public class MyPanel extends JPanel implements ActionListener {
         setLayout(new BorderLayout(10, 10));
         
         JPanel northPanel = new JPanel(new GridLayout(2, 2, 5, 5));
-        northPanel.setBorder(BorderFactory.createTitledBorder("[이용자 정보]"));
 
         ml_BorrowerName = new JLabel("이용자 이름");
         ml_BorrowerEmail = new JLabel("이용자 이메일");
@@ -45,7 +44,6 @@ public class MyPanel extends JPanel implements ActionListener {
         add(new JScrollPane(mta), BorderLayout.CENTER);
 
         JPanel southPanel = new JPanel(new GridLayout(4, 2, 5, 5));
-        southPanel.setBorder(BorderFactory.createTitledBorder("[도서 정보 입력]"));
 
         ml_BookTitle = new JLabel("책 제목");
         ml_BookAuthor = new JLabel("책 저자");
