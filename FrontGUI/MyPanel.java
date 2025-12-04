@@ -155,14 +155,6 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
             mtf_BookID.setText("");
         }
         else if(e.getSource().equals(mb_Display)){
-            // if(mrb_ForLoan.isSelected()){
-                // String libOutput = libApp.displayBookForLoan();
-                // mta.append(libOutput);
-            // }
-            // else if(mrb_OnLoan.isSelected()){
-                // String libOutput = libApp.displayBookOnLoan();
-                // mta.append(libOutput);
-            // }
             mta.append(displayInfo + "\n");
         }
     }
