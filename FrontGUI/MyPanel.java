@@ -17,7 +17,7 @@ public class MyPanel extends JPanel implements ActionListener {
     protected JTextField mtf_BorrowerName, mtf_BorrowerEmail, mtf_BookTitle, mtf_BookAuthor, mtf_BookID;
     protected JButton mb_Run, mb_Clear;
     protected JTextArea mta;
-    protected String[] loanORreturn = {"이용자 등록", "책 등록", "대출가능 책 보기", "대출중인 책 보기", "대출", "책 반납"};
+    protected String[] loanORreturn = {"이용자 등록", "책 등록", "대출가능 책 보기", "대출중인 책 보기", "책 대출", "책 반납"};
     protected JComboBox mcb_loanORreturn;
     protected String output = "";
     protected int index;
