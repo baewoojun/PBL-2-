@@ -98,6 +98,11 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
         
     }
     
+    /**
+     * actionPerformed 버튼 클릭 메뉴 선택, Enter key 입력 상황일 때 실행하는 매소드
+     *
+     * @param e 버튼 또는 메뉴 선택, Enter key 입력 상황일 때 발생하는 ActionEvent
+     */
     public void actionPerformed(ActionEvent e) {
         LibraryApplication libApp = new LibraryApplication("선문대학교 중앙도서관");
         
@@ -161,9 +166,9 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
     }
     
     /**
-     * 메소드 itemStateChanged
+     * itemStateChanged 라디오 버튼이 선택될 때 실행하는 매소드
      *
-     * @param e 파라미터
+     * @param e 는 라디오 버튼을 선택할 때 발생하는 ItemEvent
      */
     public void itemStateChanged(ItemEvent e){
         LibraryApplication libApp = new LibraryApplication("선문대학교 중앙도서관");
