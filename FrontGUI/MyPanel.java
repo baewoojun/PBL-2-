@@ -97,6 +97,7 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
         mb_Display.addActionListener(this);
         
     }
+    
     public void actionPerformed(ActionEvent e) {
         LibraryApplication libApp = new LibraryApplication("선문대학교 중앙도서관");
         
@@ -167,6 +168,11 @@ public class MyPanel extends JPanel implements ActionListener, ItemListener
         }
     }
     
+    /**
+     * 메소드 itemStateChanged
+     *
+     * @param e 파라미터
+     */
     public void itemStateChanged(ItemEvent e){
         LibraryApplication libApp = new LibraryApplication("선문대학교 중앙도서관");
         
